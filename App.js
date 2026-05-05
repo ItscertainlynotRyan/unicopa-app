@@ -9,21 +9,12 @@ import {
 import GameCard from "./app/components/GameCard";
 import DiaCard from "./app/components/DiaCard";
 import copaData from "./app/assets/data/copaData.json";
+import { agruparPorData } from "./app/utils/jogoUtils";
 import { useState } from "react";
 
 export default function App() {
   const [jogos, setJogos] = useState(copaData.jogos);
   const [dadosCopa, setDadosCopa] = useState(copaData);
-  const agruparPorData = (jogos) => {
-    return jogos.reduce((acc, jogo) => {
-      const data = jogo.data_brasilia;
-      if (!acc[data]) {
-        acc[data] = [];
-      }
-      acc[data].push(jogo);
-      return acc;
-    }, {});
-  };
   const jogosAgrupados = agruparPorData(jogos);
   const jogosTratados = Object.keys(jogosAgrupados).map((data) => {
     return {

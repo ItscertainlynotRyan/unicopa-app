@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import GameCard from "./GameCard";
+import { formatarDataDiaMes } from "../utils/jogoUtils";
 
 export default function DiaCard({ data, jogos }) {
-  const dataFormatada = data.split("-").slice(1).reverse().join("/");
+  const dataFormatada = formatarDataDiaMes(data);
 
   return (
     <View style={styles.card}>
