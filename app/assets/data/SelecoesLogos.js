@@ -1,0 +1,1 @@
+export { FLAGS } from "./ImagemPaises";
