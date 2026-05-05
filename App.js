@@ -4,12 +4,12 @@ import {
   View,
   Image,
   ImageBackground,
-  FlatList,
+  SectionList,
 } from "react-native";
 import GameCard from "./app/components/GameCard";
+import DiaCard from "./app/components/DiaCard";
 import copaData from "./app/assets/data/copaData.json";
 import { useState } from "react";
-import { SectionList } from "react-native";
 
 export default function App() {
   const [jogos, setJogos] = useState(copaData.jogos);
@@ -45,14 +45,7 @@ export default function App() {
         keyExtractor={(item, index) => item.id || index.toString()}
         renderItem={() => null}
         renderSectionHeader={({ section }) => (
-          <View style={styles.card}>
-            <Text style={styles.data}>
-              {section.title.split("-").slice(1).reverse().join("/")}
-            </Text>
-            {section.data.map((jogo) => (
-              <GameCard key={jogo.id} game={jogo} />
-            ))}
-          </View>
+          <DiaCard data={section.title} jogos={section.data} />
         )}
       />
     </ImageBackground>
