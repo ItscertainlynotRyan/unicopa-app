@@ -2,14 +2,19 @@ import { StyleSheet, Text, View } from "react-native";
 import GameCard from "./GameCard";
 import { formatarDataDiaMes } from "../utils/jogoUtils";
 
-export default function DiaCard({ data, jogos }) {
+export default function DiaCard({ data, jogos, favoritos, onToggleFavorito }) {
   const dataFormatada = formatarDataDiaMes(data);
 
   return (
     <View style={styles.card}>
       <Text style={styles.data}>{dataFormatada}</Text>
       {jogos.map((jogo) => (
-        <GameCard key={jogo.id} game={jogo} />
+        <GameCard
+          key={jogo.id}
+          game={jogo}
+          isFavorito={favoritos.includes(jogo.id)}
+          onToggleFavorito={onToggleFavorito}
+        />
       ))}
     </View>
   );

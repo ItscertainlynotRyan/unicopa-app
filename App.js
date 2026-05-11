@@ -15,6 +15,8 @@ import { useState } from "react";
 export default function App() {
   const [jogos, setJogos] = useState(copaData.jogos);
   const [dadosCopa, setDadosCopa] = useState(copaData);
+  const [favoritos, setFavoritos] = useState([]);
+
   const jogosAgrupados = agruparPorData(jogos);
   const jogosTratados = Object.keys(jogosAgrupados).map((data) => {
     return {
@@ -22,6 +24,14 @@ export default function App() {
       data: jogosAgrupados[data],
     };
   });
+
+  function handleToggleFavorito(jogoId) {
+    setFavoritos((prev) =>
+      prev.includes(jogoId)
+        ? prev.filter((id) => id !== jogoId)
+        : [...prev, jogoId]
+    );
+  }
 
   return (
     <ImageBackground
@@ -36,7 +46,12 @@ export default function App() {
         keyExtractor={(item, index) => item.id || index.toString()}
         renderItem={() => null}
         renderSectionHeader={({ section }) => (
-          <DiaCard data={section.title} jogos={section.data} />
+          <DiaCard
+            data={section.title}
+            jogos={section.data}
+            favoritos={favoritos}
+            onToggleFavorito={handleToggleFavorito}
+          />
         )}
       />
     </ImageBackground>
