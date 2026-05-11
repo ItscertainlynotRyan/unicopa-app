@@ -2,8 +2,10 @@ import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 import TimeCard from "./TimeCard";
 
 export default function GameCard({ game }) {
+  const isBrasil = game.sigla_casa === "BRA" || game.sigla_fora === "BRA";
+
   return (
-    <View style={styles.jogo}>
+    <View style={[styles.jogo, isBrasil && styles.jogoBrasil]}>
       <Text style={styles.grupo}>
         GRUPO {game.grupo} {game.confronto}
       </Text>
@@ -31,9 +33,14 @@ export default function GameCard({ game }) {
 const styles = StyleSheet.create({
   jogo: {
     marginBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#1e2d3d",
-    paddingBottom: 15,
+    borderWidth: 1,
+    borderColor: "#1e2d3d",
+    borderRadius: 12,
+    padding: 15,
+  },
+  jogoBrasil: {
+    borderColor: "#ffd700",
+    borderWidth: 2,
   },
   grupo: {
     color: "#8fa3b8",
