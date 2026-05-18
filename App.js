@@ -12,6 +12,8 @@ import copaData from "./app/assets/data/copaData.json";
 import { agruparPorData } from "./app/utils/jogoUtils";
 import { useState } from "react";
 
+//teste texto
+
 export default function App() {
   const [jogos, setJogos] = useState(copaData.jogos);
   const [dadosCopa, setDadosCopa] = useState(copaData);
