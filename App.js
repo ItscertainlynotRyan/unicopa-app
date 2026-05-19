@@ -5,8 +5,11 @@ import {
   Image,
   ImageBackground,
   SectionList,
+<<<<<<< HEAD
+=======
   ScrollView,
   Pressable,
+>>>>>>> origin/main
 } from "react-native";
 import GameCard from "./app/components/GameCard";
 import DiaCard from "./app/components/DiaCard";
@@ -14,10 +17,25 @@ import copaData from "./app/assets/data/copaData.json";
 import { agruparPorData } from "./app/utils/jogoUtils";
 import { useState } from "react";
 
+<<<<<<< HEAD
+//teste texto
+
+=======
+>>>>>>> origin/main
 export default function App() {
   const [jogos, setJogos] = useState(copaData.jogos);
   const [dadosCopa, setDadosCopa] = useState(copaData);
   const [favoritos, setFavoritos] = useState([]);
+<<<<<<< HEAD
+
+  const hoje = new Date().toISOString().split("T")[0];
+
+  const jogosAgrupados = agruparPorData(jogos);
+  const jogosTratados = Object.keys(jogosAgrupados).map((data) => {
+    const jogosOrdenados = jogosAgrupados[data].sort((a, b) => {
+      return a.hora_brasilia.localeCompare(b.hora_brasilia);
+    });
+=======
   const [filtroGrupo, setFiltroGrupo] = useState("Todos");
 
   const grupos = Array.from(new Set(copaData.jogos.map((jogo) => jogo.grupo))).sort();
@@ -28,6 +46,7 @@ export default function App() {
 
   const jogosAgrupados = agruparPorData(jogosFiltrados);
   const jogosTratados = Object.keys(jogosAgrupados).map((data) => {
+>>>>>>> origin/main
     return {
       title: data,
       data: jogosAgrupados[data],
@@ -38,7 +57,11 @@ export default function App() {
     setFavoritos((prev) =>
       prev.includes(jogoId)
         ? prev.filter((id) => id !== jogoId)
+<<<<<<< HEAD
+        : [...prev, jogoId],
+=======
         : [...prev, jogoId]
+>>>>>>> origin/main
     );
   }
 
@@ -50,6 +73,16 @@ export default function App() {
       <Image style={styles.logo} source={require("./app/assets/unicopa.png")} />
 
       <Text style={styles.title}>CALENDÁRIO</Text>
+<<<<<<< HEAD
+      <SectionList
+        sections={jogosTratados}
+        keyExtractor={(item, index) => item.id || index.toString()}
+        renderItem={() => null}
+        renderSectionHeader={({ section }) => {
+          const ehHoje = section.title === hoje;
+
+          return (
+=======
 
       <Text style={styles.subtitle}>Filtrar por grupo</Text>
       <ScrollView
@@ -107,15 +140,24 @@ export default function App() {
           keyExtractor={(item, index) => item.id || index.toString()}
           renderItem={() => null}
           renderSectionHeader={({ section }) => (
+>>>>>>> origin/main
             <DiaCard
               data={section.title}
               jogos={section.data}
               favoritos={favoritos}
               onToggleFavorito={handleToggleFavorito}
+<<<<<<< HEAD
+              isHoje={ehHoje}
+            />
+          );
+        }}
+      />
+=======
             />
           )}
         />
       )}
+>>>>>>> origin/main
     </ImageBackground>
   );
 }
@@ -139,6 +181,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "white",
   },
+<<<<<<< HEAD
+=======
   subtitle: {
     marginTop: 20,
     alignSelf: "flex-start",
@@ -176,6 +220,7 @@ const styles = StyleSheet.create({
   grupoTextoAtivo: {
     color: "#041a2a",
   },
+>>>>>>> origin/main
   card: {
     marginTop: 20,
     backgroundColor: "#0c1b2a",
@@ -238,10 +283,13 @@ const styles = StyleSheet.create({
     color: "#8fa3b8",
     fontSize: 12,
   },
+<<<<<<< HEAD
+=======
   emptyText: {
     marginTop: 40,
     color: "#8fa3b8",
     fontSize: 16,
     textAlign: "center",
   },
+>>>>>>> origin/main
 });
