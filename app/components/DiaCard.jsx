@@ -1,14 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+﻿import { StyleSheet, Text, View } from "react-native";
 import GameCard from "./GameCard";
 import { formatarDataDiaMes } from "../utils/jogoUtils";
 
-export default function DiaCard({
-  data,
-  jogos,
-  favoritos,
-  onToggleFavorito,
-  isHoje,
-}) {
+export default function DiaCard({ data, jogos, favoritos, onToggleFavorito, isHoje }) {
   const dataFormatada = formatarDataDiaMes(data);
 
   return (
@@ -16,7 +10,6 @@ export default function DiaCard({
       <Text style={[styles.data, isHoje && styles.textHoje]}>
         {dataFormatada} {isHoje && "(HOJE)"}
       </Text>
-
       {jogos.map((jogo) => (
         <GameCard
           key={jogo.id}
@@ -37,19 +30,16 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
   },
-
   cardHoje: {
     borderColor: "#f2cc2f",
     borderWidth: 2,
   },
-
   data: {
     color: "#f2cc2f",
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
   },
-
   textHoje: {
     color: "#00ff7f",
   },

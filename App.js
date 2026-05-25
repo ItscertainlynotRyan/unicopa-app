@@ -4,7 +4,6 @@ import {
   View,
   Image,
   ImageBackground,
-  SectionList,
   ScrollView,
   Pressable,
 } from "react-native";
@@ -60,29 +59,6 @@ export default function App() {
     );
   }
 
-
-async function inserirUsuario() {
-  const { data, error } = await supabase
-    .from("usuarios")
-    .insert([
-      {
-        nome: "Taffe",
-        ra: "12345678",
-        email: "teste@teste.com",
-        senha: "123456",
-        telefone: "11999999999",
-        data_nascimento: "1990-01-01",
-      },
-    ]);
-
-  if (error) {
-    console.log("Erro ao inserir usuário:", error);
-  } else {
-    console.log("Usuário inserido com sucesso:", data);
-  }
-}
-
-inserirUsuario();
 
   return (
     <ImageBackground
@@ -150,17 +126,16 @@ inserirUsuario();
           Nenhum jogo encontrado para o grupo {filtroGrupo}.
         </Text>
       ) : (
-        <SectionList
-          sections={jogosTratados}
-          keyExtractor={(item, index) =>
-            item.id?.toString() || index.toString()
-          }
-          renderItem={() => null}
-          renderSectionHeader={({ section }) => {
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.lista}
+          contentContainerStyle={styles.listaContent}
+        >
+          {jogosTratados.map((section) => {
             const ehHoje = section.title === hoje;
-
             return (
               <DiaCard
+                key={section.title}
                 data={section.title}
                 jogos={section.data}
                 favoritos={favoritos}
@@ -168,11 +143,8 @@ inserirUsuario();
                 isHoje={ehHoje}
               />
             );
-          }}
-          showsVerticalScrollIndicator={false}
-          style={styles.lista}
-          contentContainerStyle={styles.listaContent}
-        />
+          })}
+        </ScrollView>
       )}
     </ImageBackground>
   );
