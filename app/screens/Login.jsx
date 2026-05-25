@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, ActivityIndicator, Alert } from 'react-native';
 import { supabase } from '../supabaseClient';
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, onShowRegister }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -71,6 +71,10 @@ export default function Login({ onLogin }) {
       <Pressable style={styles.button} onPress={handleSignIn} disabled={loading}>
         {loading ? <ActivityIndicator color="#041a2a" /> : <Text style={styles.buttonText}>Entrar</Text>}
       </Pressable>
+
+      <Pressable style={styles.link} onPress={() => onShowRegister && onShowRegister()}>
+        <Text style={styles.linkText}>Registrar-se</Text>
+      </Pressable>
     </View>
   );
 }
@@ -111,5 +115,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#041a2a',
     fontWeight: '700',
+  },
+  link: {
+    marginTop: 12,
+    alignItems: 'center',
+  },
+  linkText: {
+    color: '#8fa3b8',
+    textDecorationLine: 'underline',
   },
 });

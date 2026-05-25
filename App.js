@@ -12,6 +12,7 @@ import copaData from "./app/assets/data/copaData.json";
 import { agruparPorData } from "./app/utils/jogoUtils";
 import { useState, useEffect } from "react";
 import Login from "./app/screens/Login";
+import Register from "./app/screens/Register";
 import { supabase } from "./app/supabaseClient";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
   const [favoritos, setFavoritos] = useState([]);
   const [filtroGrupo, setFiltroGrupo] = useState("Todos");
   const [user, setUser] = useState(null);
+  const [showRegister, setShowRegister] = useState(false);
 
   const hoje = new Date().toISOString().split("T")[0];
 
@@ -174,7 +176,11 @@ export default function App() {
           })}
         </ScrollView>
         ) : (
-          <Login onLogin={(u) => setUser(u)} />
+          showRegister ? (
+            <Register onRegistered={() => setShowRegister(false)} onCancel={() => setShowRegister(false)} />
+          ) : (
+            <Login onLogin={(u) => setUser(u)} onShowRegister={() => setShowRegister(true)} />
+          )
         )}
     </ImageBackground>
   );
