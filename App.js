@@ -88,6 +88,31 @@ export default function App() {
     };
   }, []);
 
+  const mainContent = user ? (
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.lista}
+      contentContainerStyle={styles.listaContent}
+    >
+      {jogosTratados.map((section) => {
+        const ehHoje = section.title === hoje;
+        return (
+          <DiaCard
+            key={section.title}
+            data={section.title}
+            jogos={section.data}
+            favoritos={favoritos}
+            onToggleFavorito={handleToggleFavorito}
+            isHoje={ehHoje}
+          />
+        );
+      })}
+    </ScrollView>
+  ) : showRegister ? (
+    <Register onRegistered={() => setShowRegister(false)} onCancel={() => setShowRegister(false)} />
+  ) : (
+    <Login onLogin={(u) => setUser(u)} onShowRegister={() => setShowRegister(true)} />
+  );
 
   return (
     <ImageBackground
@@ -155,33 +180,8 @@ export default function App() {
           Nenhum jogo encontrado para o grupo {filtroGrupo}.
         </Text>
       ) : (
-        user ? (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.lista}
-          contentContainerStyle={styles.listaContent}
-        >
-          {jogosTratados.map((section) => {
-            const ehHoje = section.title === hoje;
-            return (
-              <DiaCard
-                key={section.title}
-                data={section.title}
-                jogos={section.data}
-                favoritos={favoritos}
-                onToggleFavorito={handleToggleFavorito}
-                isHoje={ehHoje}
-              />
-            );
-          })}
-        </ScrollView>
-        ) : (
-          showRegister ? (
-            <Register onRegistered={() => setShowRegister(false)} onCancel={() => setShowRegister(false)} />
-          ) : (
-            <Login onLogin={(u) => setUser(u)} onShowRegister={() => setShowRegister(true)} />
-          )
-        )}
+        mainContent
+      )}
     </ImageBackground>
   );
 }
