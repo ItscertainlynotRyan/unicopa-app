@@ -10,12 +10,15 @@ import {
 import DiaCard from "./app/components/DiaCard";
 import copaData from "./app/assets/data/copaData.json";
 import { agruparPorData } from "./app/utils/jogoUtils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Login from "./app/screens/Login";
+import { supabase } from "./app/supabaseClient";
 
 export default function App() {
   const [jogos] = useState(copaData.jogos);
   const [favoritos, setFavoritos] = useState([]);
   const [filtroGrupo, setFiltroGrupo] = useState("Todos");
+  const [user, setUser] = useState(null);
 
   const hoje = new Date().toISOString().split("T")[0];
 
@@ -58,6 +61,30 @@ export default function App() {
         : [...prev, jogoId]
     );
   }
+  useEffect(() => {
+    let mounted = true;
+    async function loadUser() {
+      try {
+        const { data, error } = await supabase.auth.getUser();
+        if (!error && mounted) {
+          setUser(data.user || null);
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    loadUser();
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      mounted = false;
+      listener?.subscription?.unsubscribe?.();
+    };
+  }, []);
 
 
   return (
@@ -126,6 +153,7 @@ export default function App() {
           Nenhum jogo encontrado para o grupo {filtroGrupo}.
         </Text>
       ) : (
+        user ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.lista}
@@ -145,7 +173,9 @@ export default function App() {
             );
           })}
         </ScrollView>
-      )}
+        ) : (
+          <Login onLogin={(u) => setUser(u)} />
+        )}
     </ImageBackground>
   );
 }
