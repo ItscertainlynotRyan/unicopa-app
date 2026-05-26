@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-// TODO: substitua essas variáveis pelos valores do seu projeto Supabase
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://your-supabase-url.supabase.co';
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'your-anon-key';
+// A URL do seu projeto (pode manter exatamente essa)
+const supabaseUrl = 'https://jtsbgymnemdokupqglyx.supabase.co'; 
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Cole aqui a chave que você acabou de copiar (tire o 'SUA_CHAVE...' e cole o texto todo)
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0c2JneW1uZW1kb2t1cHFnbHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTI3NDAsImV4cCI6MjA5NDE4ODc0MH0.wsmzxBXiKHbl3oQzX_KchOnfSnTQEPtQv9spLqAcUqw'; 
 
-export default supabase;
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { supabase } from '../supabaseClient';
 
 export default function Register({ onRegistered, onCancel }) {
@@ -16,36 +16,64 @@ export default function Register({ onRegistered, onCancel }) {
 
   async function handleSignUp() {
     if (!email.trim() || !password) {
-      Alert.alert('Erro', 'E-mail e senha são obrigatórios.');
+      alert('E-mail e senha são obrigatórios.');
       return;
     }
     if (!validarEmail(email)) {
-      Alert.alert('Erro', 'Formato de e-mail inválido.');
+      alert('Formato de e-mail inválido.');
       return;
     }
     if (password.length < 6) {
-      Alert.alert('Erro', 'Senha deve ter ao menos 6 caracteres.');
+      alert('A senha deve ter ao menos 6 caracteres.');
       return;
     }
     if (password !== confirm) {
-      Alert.alert('Erro', 'Senha e confirmação não conferem.');
+      alert('A senha e a confirmação não conferem.');
       return;
     }
 
     setLoading(true);
     try {
-      const { data, error } = await supabase.auth.signUp({ email, password }, { data: { name } });
+      // 1. Cadastro no Supabase Auth
+      const { data, error } = await supabase.auth.signUp({ 
+        email: email.trim(), 
+        password: password,
+        options: {
+          data: { name: name.trim() }
+        }
+      });
+
       if (error) {
-        Alert.alert('Falha no cadastro', error.message || 'Tente novamente.');
+        alert('Falha no cadastro: ' + error.message);
       } else {
-        Alert.alert(
-          'Cadastro realizado',
-          'Registro efetuado com sucesso. Confira seu e-mail para confirmar a conta, se aplicável.'
-        );
+        // Captura o UUID gerado pelo Auth
+        const userId = data.user?.id;
+
+        // 2. Monta o objeto espelhando as colunas exatas da tabela do banco
+        const userData = {
+          id: userId, // <-- Agora o UUID entra perfeitamente aqui!
+          nome: name.trim() || '',
+          email: email.trim(),
+          telefone: '',
+          data_nascimento: null,
+          ra: '',
+        };
+
+        // 3. Insere os dados adicionais na tabela 'usuarios'
+        const { error: insertError } = await supabase.from('usuarios').insert([userData]);
+        
+        if (insertError) {
+          console.warn('Erro ao salvar usuário na tabela usuarios:', insertError);
+          alert('Cadastro parcial: Usuário criado no auth, mas houve um erro ao sincronizar com a tabela pública.');
+          setLoading(false);
+          return;
+        }
+
+        alert('Registro efetuado com sucesso!');
         onRegistered && onRegistered();
       }
     } catch (err) {
-      Alert.alert('Erro', err.message || String(err));
+      alert('Erro inesperado: ' + (err.message || String(err)));
     } finally {
       setLoading(false);
     }

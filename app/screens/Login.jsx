@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Pressable, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { supabase } from '../supabaseClient';
 
 export default function Login({ onLogin, onShowRegister }) {
@@ -14,30 +14,44 @@ export default function Login({ onLogin, onShowRegister }) {
 
   async function handleSignIn() {
     if (!email.trim() || !password) {
-      Alert.alert('Erro', 'E-mail e senha são obrigatórios.');
+      alert('E-mail e senha são obrigatórios.');
       return;
     }
 
     if (!validarEmail(email)) {
-      Alert.alert('Erro', 'Formato de e-mail inválido.');
+      alert('Formato de e-mail inválido.');
       return;
     }
 
     setLoading(true);
+    
+    // Mostra no console exatamente os dados enviados antes de chamar o servidor
+    console.log("Tentando logar com o e-mail:", email.trim());
+
     try {
-      const res = await supabase.auth.signInWithPassword({ email, password });
+      const res = await supabase.auth.signInWithPassword({ 
+        email: email.trim(), 
+        password: password 
+      });
+
+      // Exibe a resposta completa do servidor no console (inspecione para ver os detalhes)
+      console.log("Resposta bruta do Supabase:", res);
+
       if (res.error) {
-        Alert.alert('Falha ao entrar', res.error.message || 'Verifique suas credenciais.');
+        console.log("Erro identificado:", res.error.message);
+        alert('Falha ao entrar: ' + res.error.message);
       } else if (res.data?.user) {
+        console.log("Usuário logado com sucesso!");
         onLogin && onLogin(res.data.user);
       } else if (res.data?.session) {
-        // Em alguns fluxos o objeto user pode vir dentro da session
+        console.log("Sessão iniciada com sucesso!");
         onLogin && onLogin(res.data.session.user || res.data.user);
       } else {
-        Alert.alert('Falha', 'Resposta inesperada do servidor.');
+        alert('Falha: Resposta inesperada do servidor.');
       }
     } catch (err) {
-      Alert.alert('Erro', err.message || String(err));
+      console.error('Erro pego no Bloco Catch:', err);
+      alert('Erro inesperado: ' + (err.message || String(err)));
     } finally {
       setLoading(false);
     }
