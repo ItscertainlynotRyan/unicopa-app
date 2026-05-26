@@ -6,6 +6,7 @@ import {
   ImageBackground,
   ScrollView,
   Pressable,
+  Alert,
 } from "react-native";
 import DiaCard from "./app/components/DiaCard";
 import copaData from "./app/assets/data/copaData.json";
@@ -57,11 +58,56 @@ export default function App() {
     });
 
   function handleToggleFavorito(jogoId) {
-    setFavoritos((prev) =>
-      prev.includes(jogoId)
-        ? prev.filter((id) => id !== jogoId)
-        : [...prev, jogoId]
-    );
+    // local optimistic update and persist to Supabase
+    (async () => {
+      if (!user) {
+        Alert.alert('Atenção', 'Faça login para favoritar jogos.');
+        return;
+      }
+
+      const already = favoritos.includes(jogoId);
+
+      if (already) {
+        // remove favorito
+        const { error } = await supabase
+          .from('favoritos')
+          .delete()
+          .eq('user_id', user.id)
+          .eq('jogo_id', jogoId);
+        if (error) {
+          console.warn('Erro ao remover favorito:', error);
+          Alert.alert('Erro', 'Não foi possível remover dos favoritos.');
+          return;
+        }
+        setFavoritos((prev) => prev.filter((id) => id !== jogoId));
+      } else {
+        // adiciona favorito
+        const { error } = await supabase.from('favoritos').insert([
+          { user_id: user.id, jogo_id: jogoId },
+        ]);
+        if (error) {
+          console.warn('Erro ao adicionar favorito:', error);
+          Alert.alert('Erro', 'Não foi possível adicionar aos favoritos.');
+          return;
+        }
+        setFavoritos((prev) => [...prev, jogoId]);
+      }
+    })();
+  }
+
+  async function fetchFavoritos(userId) {
+    if (!userId) return;
+    try {
+      const { data, error } = await supabase
+        .from('favoritos')
+        .select('jogo_id')
+        .eq('user_id', userId);
+      if (!error && data) {
+        setFavoritos(data.map((r) => r.jogo_id));
+      }
+    } catch (e) {
+      console.warn('Erro ao buscar favoritos:', e);
+    }
   }
   useEffect(() => {
     let mounted = true;
@@ -69,7 +115,9 @@ export default function App() {
       try {
         const { data, error } = await supabase.auth.getUser();
         if (!error && mounted) {
-          setUser(data.user || null);
+          const u = data.user || null;
+          setUser(u);
+          if (u) await fetchFavoritos(u.id);
         }
       } catch (e) {
         // ignore
@@ -79,7 +127,13 @@ export default function App() {
     loadUser();
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      const u = session?.user ?? null;
+      setUser(u);
+      if (u) {
+        fetchFavoritos(u.id);
+      } else {
+        setFavoritos([]);
+      }
     });
 
     return () => {
