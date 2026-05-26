@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   Pressable,
-  Alert,
 } from "react-native";
 import TimeCard from "./TimeCard";
 import { useState, useEffect } from "react";
@@ -34,17 +33,16 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
     try {
       const { data, error } = await supabase
         .from("palpite")
-        .select("placat_time_casa, placar_time_fora")
+        .select("placar_time_casa, placar_time_fora") // Ajustado com 'r' conforme estrutura do banco
         .eq("id_usuario", userId)
         .eq("id_jogo", jogo.id)
         .single();
 
       if (!error && data) {
-        setGolsCasa(String(data.placat_time_casa));
+        setGolsCasa(String(data.placar_time_casa));
         setGolsFora(String(data.placar_time_fora));
       }
     } catch (e) {
-      // Sem palpite existente, tudo bem
       console.log("Sem palpite anterior para este jogo");
     }
   }
@@ -52,7 +50,7 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
   // Salva/atualiza palpite
   async function handleSaveGuess() {
     if (golsCasa === "" || golsFora === "") {
-      Alert.alert("Atenção", "Preencha ambos os placares");
+      alert("Preencha ambos os placares antes de salvar.");
       return;
     }
 
@@ -60,25 +58,26 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
     const gols_fora = parseInt(golsFora, 10);
 
     if (isNaN(gols_casa) || isNaN(gols_fora)) {
-      Alert.alert("Erro", "Placares devem ser números válidos");
+      alert("Os placares devem ser números válidos.");
       return;
     }
 
     setLoading(true);
 
     try {
-      // Tenta fazer upsert: delete + insert
+      // 1. Remove qualquer palpite anterior duplicado deste usuário para este jogo específico
       await supabase
         .from("palpite")
         .delete()
         .eq("id_usuario", userId)
         .eq("id_jogo", jogo.id);
 
+      // 2. Insere o novo palpite correspondendo exatamente às colunas do banco de dados
       const { error } = await supabase.from("palpite").insert([
         {
-          id_usuario: userId,
+          id_usuario: userId,       // Agora salvando como UUID aceito pelo banco ajustado
           id_jogo: jogo.id,
-          placat_time_casa: gols_casa,
+          placar_time_casa: gols_casa, // Nome exato da coluna da imagem de9a7e.png
           placar_time_fora: gols_fora,
           situacao: "pendente",
         },
@@ -86,15 +85,15 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
 
       if (error) {
         console.warn("Erro ao salvar palpite:", error);
-        Alert.alert("Erro", "Não foi possível salvar o palpite");
+        alert("Não foi possível salvar o palpite: " + error.message);
         return;
       }
 
-      Alert.alert("Sucesso", "Palpite salvo com sucesso!");
+      alert("Palpite salvo com sucesso! 🚀");
       onUpdate?.();
     } catch (e) {
       console.warn("Erro ao salvar palpite:", e);
-      Alert.alert("Erro", "Ocorreu um erro ao salvar o palpite");
+      alert("Ocorreu um erro ao salvar o palpite.");
     } finally {
       setLoading(false);
     }
@@ -173,31 +172,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
   },
-
   jogoBrasil: {
     borderColor: "#ffd700",
     borderWidth: 2,
   },
-
   jogoLocked: {
     opacity: 0.6,
     borderColor: "#8b3a3a",
   },
-
   headerRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
   },
-
   grupo: {
     color: "#8fa3b8",
     fontSize: 12,
     fontWeight: "bold",
     flex: 1,
   },
-
   lockedBadge: {
     backgroundColor: "#8b3a3a",
     color: "#fff",
@@ -207,21 +201,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "700",
   },
-
   linhaPrincipal: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 12,
   },
-
   scoreContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     gap: 6,
   },
-
   scoreInput: {
     width: 45,
     height: 45,
@@ -234,43 +225,35 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-
   scoreInputLocked: {
     borderColor: "#8b3a3a",
     backgroundColor: "#0a1520",
   },
-
   hora: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },
-
   local: {
     marginTop: 8,
     marginBottom: 12,
   },
-
   subTitulo: {
     color: "#8fa3b8",
     fontSize: 12,
   },
-
   saveButton: {
     backgroundColor: "#f2cc2f",
     borderRadius: 8,
     paddingVertical: 10,
     alignItems: "center",
   },
-
   saveButtonPressed: {
     opacity: 0.8,
   },
-
   saveButtonLoading: {
     opacity: 0.6,
   },
-
   saveButtonText: {
     color: "#041a2a",
     fontWeight: "700",
