@@ -14,6 +14,7 @@ import { agruparPorData } from "./app/utils/jogoUtils";
 import { useState, useEffect } from "react";
 import Login from "./app/screens/Login";
 import Register from "./app/screens/Register";
+import GuessScreen from "./app/screens/GuessScreen";
 import { supabase } from "./app/supabaseClient";
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
   const [filtroGrupo, setFiltroGrupo] = useState("Todos");
   const [user, setUser] = useState(null);
   const [showRegister, setShowRegister] = useState(false);
+  const [showGuesses, setShowGuesses] = useState(false);
 
   const hoje = new Date().toISOString().split("T")[0];
 
@@ -95,6 +97,22 @@ export default function App() {
     })();
   }
 
+  async function handleSignOut() {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        Alert.alert('Erro', 'Não foi possível sair da conta.');
+        console.warn('Erro ao deslogar:', error);
+        return;
+      }
+      setUser(null);
+      setFavoritos([]);
+    } catch (e) {
+      console.warn('Erro ao deslogar:', e);
+      Alert.alert('Erro', 'Ocorreu um erro ao sair.');
+    }
+  }
+
   async function fetchFavoritos(userId) {
     if (!userId) return;
     try {
@@ -143,25 +161,29 @@ export default function App() {
   }, []);
 
   const mainContent = user ? (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.lista}
-      contentContainerStyle={styles.listaContent}
-    >
-      {jogosTratados.map((section) => {
-        const ehHoje = section.title === hoje;
-        return (
-          <DiaCard
-            key={section.title}
-            data={section.title}
-            jogos={section.data}
-            favoritos={favoritos}
-            onToggleFavorito={handleToggleFavorito}
-            isHoje={ehHoje}
-          />
-        );
-      })}
-    </ScrollView>
+    showGuesses ? (
+      <GuessScreen user={user} onGoBack={() => setShowGuesses(false)} />
+    ) : (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.lista}
+        contentContainerStyle={styles.listaContent}
+      >
+        {jogosTratados.map((section) => {
+          const ehHoje = section.title === hoje;
+          return (
+            <DiaCard
+              key={section.title}
+              data={section.title}
+              jogos={section.data}
+              favoritos={favoritos}
+              onToggleFavorito={handleToggleFavorito}
+              isHoje={ehHoje}
+            />
+          );
+        })}
+      </ScrollView>
+    )
   ) : showRegister ? (
     <Register onRegistered={() => setShowRegister(false)} onCancel={() => setShowRegister(false)} />
   ) : (
@@ -173,10 +195,25 @@ export default function App() {
       style={styles.container}
       source={require("./app/assets/bg-overlay.png")}
     >
-      <Image
-        style={styles.logo}
-        source={require("./app/assets/unicopa.png")}
-      />
+      {!showGuesses && (
+        <>
+          <Image
+            style={styles.logo}
+            source={require("./app/assets/unicopa.png")}
+          />
+
+          {user && (
+            <View style={styles.topButtonsContainer}>
+              <Pressable style={styles.guessButton} onPress={() => setShowGuesses(true)}>
+                <Text style={styles.guessButtonText}>Palpites</Text>
+              </Pressable>
+              <Pressable style={styles.logoutButton} onPress={handleSignOut}>
+                <Text style={styles.logoutText}>Sair</Text>
+              </Pressable>
+            </View>
+          )}
+        </>
+      )}
 
       <Text style={styles.title}>CALENDÁRIO</Text>
 
@@ -311,6 +348,40 @@ const styles = StyleSheet.create({
 
   grupoTextoAtivo: {
     color: "#041a2a",
+  },
+
+  topButtonsContainer: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 12,
+    marginRight: 16,
+    justifyContent: "flex-end",
+  },
+
+  guessButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: "#f2cc2f",
+    borderRadius: 6,
+  },
+
+  guessButtonText: {
+    color: "#041a2a",
+    fontWeight: "700",
+    fontSize: 14,
+  },
+
+  logoutButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: "#f2cc2f",
+    borderRadius: 6,
+  },
+
+  logoutText: {
+    color: "#041a2a",
+    fontWeight: "700",
+    fontSize: 14,
   },
 
   lista: {
