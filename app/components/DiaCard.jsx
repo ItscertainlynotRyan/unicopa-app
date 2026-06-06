@@ -14,7 +14,7 @@ export default function DiaCard({ data, jogos, favoritos, onToggleFavorito, isHo
         <GameCard
           key={jogo.id}
           game={jogo}
-          isFavorito={favoritos.includes(jogo.id)}
+          isFavorito={favoritos.includes(String(jogo.id))}
           onToggleFavorito={() => onToggleFavorito(jogo.id)}
         />
       ))}

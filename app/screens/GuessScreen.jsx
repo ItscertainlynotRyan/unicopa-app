@@ -6,16 +6,20 @@ import {
   Pressable,
   ActivityIndicator,
   Alert,
+  Modal,
 } from "react-native";
 import GuessCard from "../components/GuessCard";
 import copaData from "../assets/data/copaData.json";
 import { agruparPorData } from "../utils/jogoUtils";
 import { useState, useEffect } from "react";
+import { supabase } from "../supabaseClient";
 
 export default function GuessScreen({ user, onGoBack }) {
   const [jogos] = useState(copaData.jogos);
   const [filtroGrupo, setFiltroGrupo] = useState("Todos");
   const [refreshing, setRefreshing] = useState(false);
+  const [palpites, setPalpites] = useState([]);
+  const [reviewVisible, setReviewVisible] = useState(false);
 
   // Lista de grupos únicos
   const grupos = Array.from(
@@ -49,10 +53,70 @@ export default function GuessScreen({ user, onGoBack }) {
       };
     });
 
-  function handleRefresh() {
+  async function fetchPalpites() {
     setRefreshing(true);
-    // Simula refresh; em produção, você poderia recarregar palpites do Supabase
-    setTimeout(() => setRefreshing(false), 500);
+    try {
+      const { data, error } = await supabase
+        .from("palpite")
+        .select("id, id_jogo, placar_time_casa, placar_time_fora, situacao")
+        .eq("id_usuario", user.id);
+
+      if (error) {
+        console.warn("Erro ao carregar palpites:", error);
+        Alert.alert("Erro", "Não foi possível carregar seus palpites.");
+        return;
+      }
+
+      setPalpites(data || []);
+    } catch (e) {
+      console.warn("Erro ao carregar palpites:", e);
+      Alert.alert("Erro", "Não foi possível carregar seus palpites.");
+    } finally {
+      setRefreshing(false);
+    }
+  }
+
+  function handleRefresh() {
+    fetchPalpites();
+  }
+
+  useEffect(() => {
+    if (user) {
+      fetchPalpites();
+    }
+  }, [user]);
+
+  async function handleConfirmReview() {
+    const pending = palpites.filter((palpite) => palpite.situacao === "pendente");
+
+    if (pending.length === 0) {
+      Alert.alert("Revisão", "Não há palpites pendentes para confirmar.");
+      return;
+    }
+
+    setRefreshing(true);
+    try {
+      const { error } = await supabase
+        .from("palpite")
+        .update({ situacao: "confirmado" })
+        .eq("id_usuario", user.id)
+        .eq("situacao", "pendente");
+
+      if (error) {
+        console.warn("Erro ao confirmar palpites:", error);
+        Alert.alert("Erro", "Não foi possível confirmar seus palpites.");
+        return;
+      }
+
+      Alert.alert("Sucesso", "Seus palpites foram confirmados com sucesso.");
+      setReviewVisible(false);
+      await fetchPalpites();
+    } catch (e) {
+      console.warn("Erro ao confirmar palpites:", e);
+      Alert.alert("Erro", "Ocorreu um erro ao confirmar seus palpites.");
+    } finally {
+      setRefreshing(false);
+    }
   }
 
   return (
@@ -64,7 +128,15 @@ export default function GuessScreen({ user, onGoBack }) {
         </Pressable>
       </View>
 
-      <Text style={styles.subtitle}>Filtrar por grupo</Text>
+      <View style={styles.reviewRow}>
+        <Text style={styles.subtitle}>Filtrar por grupo</Text>
+        <Pressable
+          style={styles.reviewButton}
+          onPress={() => setReviewVisible(true)}
+        >
+          <Text style={styles.reviewButtonText}>Revisar palpites</Text>
+        </Pressable>
+      </View>
 
       <View style={styles.filtroWrapper}>
         <ScrollView
@@ -117,10 +189,13 @@ export default function GuessScreen({ user, onGoBack }) {
         showsVerticalScrollIndicator={false}
         style={styles.lista}
         contentContainerStyle={styles.listaContent}
-        refreshControl={
-          refreshing && <ActivityIndicator color="#f2cc2f" size="large" />
-        }
       >
+        {refreshing && (
+          <View style={styles.refreshWrapper}>
+            <ActivityIndicator color="#f2cc2f" size="large" />
+          </View>
+        )}
+
         {jogosTratados.map((section) => (
           <View key={section.title}>
             <Text style={styles.sectionTitle}>{section.title}</Text>
@@ -129,12 +204,66 @@ export default function GuessScreen({ user, onGoBack }) {
                 key={jogo.id}
                 jogo={jogo}
                 userId={user.id}
+                existingGuess={palpites.find((palpite) => palpite.id_jogo === jogo.id)}
                 onUpdate={handleRefresh}
               />
             ))}
           </View>
         ))}
       </ScrollView>
+
+      <Modal
+        visible={reviewVisible}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setReviewVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Revisão de palpites</Text>
+            <ScrollView style={styles.modalList}>
+              {palpites.length === 0 ? (
+                <Text style={styles.modalEmpty}>
+                  Você ainda não tem palpites salvos.
+                </Text>
+              ) : (
+                palpites.map((palpite) => {
+                  const jogo = jogos.find((jogo) => jogo.id === palpite.id_jogo);
+                  if (!jogo) return null;
+                  return (
+                    <View key={palpite.id} style={styles.modalItem}>
+                      <Text style={styles.modalItemTitle}>{jogo.confronto}</Text>
+                      <Text style={styles.modalItemText}>
+                        {palpite.placar_time_casa} x {palpite.placar_time_fora}
+                      </Text>
+                      <Text style={styles.modalItemStatus}>
+                        {palpite.situacao === "confirmado"
+                          ? "Confirmado"
+                          : "Pendente"}
+                      </Text>
+                    </View>
+                  );
+                })
+              )}
+            </ScrollView>
+
+            <View style={styles.modalActions}>
+              <Pressable
+                style={styles.modalButtonCancel}
+                onPress={() => setReviewVisible(false)}
+              >
+                <Text style={styles.modalButtonCancelText}>Cancelar</Text>
+              </Pressable>
+              <Pressable
+                style={styles.modalButtonConfirm}
+                onPress={handleConfirmReview}
+              >
+                <Text style={styles.modalButtonConfirmText}>Confirmar</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -238,5 +367,118 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     marginBottom: 8,
     marginTop: 12,
+  },
+
+  reviewRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    marginTop: 16,
+  },
+
+  reviewButton: {
+    backgroundColor: "#f2cc2f",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+
+  reviewButtonText: {
+    color: "#041a2a",
+    fontWeight: "700",
+  },
+
+  refreshWrapper: {
+    width: "100%",
+    paddingVertical: 20,
+    alignItems: "center",
+  },
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.65)",
+    justifyContent: "center",
+    padding: 20,
+  },
+
+  modalContent: {
+    backgroundColor: "#041a2a",
+    borderRadius: 16,
+    padding: 20,
+    maxHeight: "80%",
+  },
+
+  modalTitle: {
+    color: "#f2cc2f",
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 16,
+  },
+
+  modalList: {
+    marginBottom: 16,
+  },
+
+  modalEmpty: {
+    color: "#fff",
+    textAlign: "center",
+    paddingVertical: 24,
+  },
+
+  modalItem: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#1e2d3d",
+    paddingVertical: 12,
+  },
+
+  modalItemTitle: {
+    color: "#f2cc2f",
+    fontWeight: "700",
+    marginBottom: 4,
+  },
+
+  modalItemText: {
+    color: "#fff",
+    marginBottom: 4,
+  },
+
+  modalItemStatus: {
+    color: "#8fa3b8",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+
+  modalActions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  modalButtonCancel: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#f2cc2f",
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+
+  modalButtonCancelText: {
+    color: "#f2cc2f",
+    fontWeight: "700",
+  },
+
+  modalButtonConfirm: {
+    flex: 1,
+    backgroundColor: "#f2cc2f",
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+
+  modalButtonConfirmText: {
+    color: "#041a2a",
+    fontWeight: "700",
   },
 });

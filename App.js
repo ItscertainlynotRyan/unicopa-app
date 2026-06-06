@@ -59,42 +59,38 @@ export default function App() {
       };
     });
 
-  function handleToggleFavorito(jogoId) {
-    // local optimistic update and persist to Supabase
-    (async () => {
-      if (!user) {
-        Alert.alert('Atenção', 'Faça login para favoritar jogos.');
+  async function handleToggleFavorito(jogoId) {
+    if (!user) {
+      Alert.alert('Atenção', 'Faça login para favoritar jogos.');
+      return;
+    }
+
+    const jogoIdStr = String(jogoId);
+    const already = favoritos.includes(jogoIdStr);
+
+    if (already) {
+      const { error } = await supabase
+        .from('favoritos')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('jogo_id', jogoId);
+      if (error) {
+        console.warn('Erro ao remover favorito:', error);
+        Alert.alert('Erro', 'Não foi possível remover dos favoritos.');
         return;
       }
-
-      const already = favoritos.includes(jogoId);
-
-      if (already) {
-        // remove favorito
-        const { error } = await supabase
-          .from('favoritos')
-          .delete()
-          .eq('user_id', user.id)
-          .eq('jogo_id', jogoId);
-        if (error) {
-          console.warn('Erro ao remover favorito:', error);
-          Alert.alert('Erro', 'Não foi possível remover dos favoritos.');
-          return;
-        }
-        setFavoritos((prev) => prev.filter((id) => id !== jogoId));
-      } else {
-        // adiciona favorito
-        const { error } = await supabase.from('favoritos').insert([
-          { user_id: user.id, jogo_id: jogoId },
-        ]);
-        if (error) {
-          console.warn('Erro ao adicionar favorito:', error);
-          Alert.alert('Erro', 'Não foi possível adicionar aos favoritos.');
-          return;
-        }
-        setFavoritos((prev) => [...prev, jogoId]);
+      setFavoritos((prev) => prev.filter((id) => id !== jogoIdStr));
+    } else {
+      const { error } = await supabase.from('favoritos').insert([
+        { user_id: user.id, jogo_id: jogoId },
+      ]);
+      if (error) {
+        console.warn('Erro ao adicionar favorito:', error);
+        Alert.alert('Erro', 'Não foi possível adicionar aos favoritos.');
+        return;
       }
-    })();
+      setFavoritos((prev) => [...prev, jogoIdStr]);
+    }
   }
 
   async function handleSignOut() {
@@ -121,7 +117,7 @@ export default function App() {
         .select('jogo_id')
         .eq('user_id', userId);
       if (!error && data) {
-        setFavoritos(data.map((r) => r.jogo_id));
+        setFavoritos(data.map((r) => String(r.jogo_id)));
       }
     } catch (e) {
       console.warn('Erro ao buscar favoritos:', e);

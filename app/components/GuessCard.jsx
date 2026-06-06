@@ -9,17 +9,24 @@ import TimeCard from "./TimeCard";
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
-export default function GuessCard({ jogo, userId, onUpdate }) {
+export default function GuessCard({ jogo, userId, existingGuess, onUpdate }) {
   const [golsCasa, setGolsCasa] = useState("");
   const [golsFora, setGolsFora] = useState("");
   const [loading, setLoading] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
+  const [situacao, setSituacao] = useState(existingGuess?.situacao || "pendente");
 
   // Carrega palpite existente ao montar ou quando jogo muda
   useEffect(() => {
-    loadGuess();
+    if (existingGuess) {
+      setGolsCasa(String(existingGuess.placar_time_casa ?? ""));
+      setGolsFora(String(existingGuess.placar_time_fora ?? ""));
+      setSituacao(existingGuess.situacao ?? "pendente");
+    } else {
+      loadGuess();
+    }
     checkIfLocked();
-  }, [jogo.id]);
+  }, [jogo.id, existingGuess]);
 
   // Verifica se o jogo já começou
   function checkIfLocked() {
@@ -33,7 +40,7 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
     try {
       const { data, error } = await supabase
         .from("palpite")
-        .select("placar_time_casa, placar_time_fora") // Ajustado com 'r' conforme estrutura do banco
+        .select("placar_time_casa, placar_time_fora, situacao")
         .eq("id_usuario", userId)
         .eq("id_jogo", jogo.id)
         .single();
@@ -41,6 +48,7 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
       if (!error && data) {
         setGolsCasa(String(data.placar_time_casa));
         setGolsFora(String(data.placar_time_fora));
+        setSituacao(data.situacao || "pendente");
       }
     } catch (e) {
       console.log("Sem palpite anterior para este jogo");
@@ -49,6 +57,11 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
 
   // Salva/atualiza palpite
   async function handleSaveGuess() {
+    if (situacao === "confirmado") {
+      alert("Este palpite já foi confirmado e não pode ser alterado.");
+      return;
+    }
+
     if (golsCasa === "" || golsFora === "") {
       alert("Preencha ambos os placares antes de salvar.");
       return;
@@ -75,9 +88,9 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
       // 2. Insere o novo palpite correspondendo exatamente às colunas do banco de dados
       const { error } = await supabase.from("palpite").insert([
         {
-          id_usuario: userId,       // Agora salvando como UUID aceito pelo banco ajustado
+          id_usuario: userId,
           id_jogo: jogo.id,
-          placar_time_casa: gols_casa, // Nome exato da coluna da imagem de9a7e.png
+          placar_time_casa: gols_casa,
           placar_time_fora: gols_fora,
           situacao: "pendente",
         },
@@ -89,6 +102,7 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
         return;
       }
 
+      setSituacao("pendente");
       alert("Palpite salvo com sucesso! 🚀");
       onUpdate?.();
     } catch (e) {
@@ -107,7 +121,11 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
         <Text style={styles.grupo}>
           GRUPO {jogo.grupo} • {jogo.confronto}
         </Text>
-        {isLocked && <Text style={styles.lockedBadge}>Encerrado</Text>}
+        {situacao === "confirmado" ? (
+          <Text style={styles.confirmedBadge}>Confirmado</Text>
+        ) : isLocked ? (
+          <Text style={styles.lockedBadge}>Encerrado</Text>
+        ) : null}
       </View>
 
       <View style={styles.linhaPrincipal}>
@@ -115,23 +133,23 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
 
         <View style={styles.scoreContainer}>
           <TextInput
-            style={[styles.scoreInput, isLocked && styles.scoreInputLocked]}
+            style={[styles.scoreInput, (isLocked || situacao === "confirmado") && styles.scoreInputLocked]}
             placeholder="0"
             keyboardType="number-pad"
             maxLength={2}
             value={golsCasa}
             onChangeText={setGolsCasa}
-            editable={!isLocked}
+            editable={!isLocked && situacao !== "confirmado"}
           />
           <Text style={styles.hora}>{jogo.hora_brasilia}</Text>
           <TextInput
-            style={[styles.scoreInput, isLocked && styles.scoreInputLocked]}
+            style={[styles.scoreInput, (isLocked || situacao === "confirmado") && styles.scoreInputLocked]}
             placeholder="0"
             keyboardType="number-pad"
             maxLength={2}
             value={golsFora}
             onChangeText={setGolsFora}
-            editable={!isLocked}
+            editable={!isLocked && situacao !== "confirmado"}
           />
         </View>
 
@@ -145,7 +163,7 @@ export default function GuessCard({ jogo, userId, onUpdate }) {
         </Text>
       </View>
 
-      {!isLocked && (
+      {!isLocked && situacao !== "confirmado" && (
         <Pressable
           style={({ pressed }) => [
             styles.saveButton,
@@ -194,6 +212,15 @@ const styles = StyleSheet.create({
   },
   lockedBadge: {
     backgroundColor: "#8b3a3a",
+    color: "#fff",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  confirmedBadge: {
+    backgroundColor: "#26a69a",
     color: "#fff",
     paddingHorizontal: 8,
     paddingVertical: 4,
