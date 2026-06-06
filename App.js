@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import Login from "./app/screens/Login";
 import Register from "./app/screens/Register";
 import GuessScreen from "./app/screens/GuessScreen";
+import MyGuesses from "./app/screens/MyGuesses";
 import { supabase } from "./app/supabaseClient";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [showRegister, setShowRegister] = useState(false);
   const [showGuesses, setShowGuesses] = useState(false);
+  const [showMyGuesses, setShowMyGuesses] = useState(false);
 
   const hoje = new Date().toISOString().split("T")[0];
 
@@ -157,7 +159,9 @@ export default function App() {
   }, []);
 
   const mainContent = user ? (
-    showGuesses ? (
+    showMyGuesses ? (
+      <MyGuesses user={user} onGoBack={() => setShowMyGuesses(false)} />
+    ) : showGuesses ? (
       <GuessScreen user={user} onGoBack={() => setShowGuesses(false)} />
     ) : (
       <ScrollView
@@ -191,7 +195,7 @@ export default function App() {
       style={styles.container}
       source={require("./app/assets/bg-overlay.png")}
     >
-      {!showGuesses && (
+      {!showGuesses && !showMyGuesses && (
         <>
           <Image
             style={styles.logo}
@@ -203,6 +207,9 @@ export default function App() {
               <Pressable style={styles.guessButton} onPress={() => setShowGuesses(true)}>
                 <Text style={styles.guessButtonText}>Palpites</Text>
               </Pressable>
+              <Pressable style={styles.guessButton} onPress={() => setShowMyGuesses(true)}>
+                <Text style={styles.guessButtonText}>Meus Palpites</Text>
+              </Pressable>
               <Pressable style={styles.logoutButton} onPress={handleSignOut}>
                 <Text style={styles.logoutText}>Sair</Text>
               </Pressable>
@@ -211,61 +218,67 @@ export default function App() {
         </>
       )}
 
-      <Text style={styles.title}>CALENDÁRIO</Text>
+      {!showGuesses && !showMyGuesses ? (
+        <>
+          <Text style={styles.title}>CALENDÁRIO</Text>
 
-      <Text style={styles.subtitle}>Filtrar por grupo</Text>
+          <Text style={styles.subtitle}>Filtrar por grupo</Text>
 
-      <View style={styles.filtroWrapper}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.gruposContainer}
-        >
-          <Pressable
-            style={({ pressed }) => [
-              styles.grupoBotao,
-              filtroGrupo === "Todos" && styles.grupoBotaoAtivo,
-              pressed && styles.grupoBotaoPressionado,
-            ]}
-            onPress={() => setFiltroGrupo("Todos")}
-          >
-            <Text
-              style={[
-                styles.grupoTexto,
-                filtroGrupo === "Todos" && styles.grupoTextoAtivo,
-              ]}
+          <View style={styles.filtroWrapper}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.gruposContainer}
             >
-              Todos
-            </Text>
-          </Pressable>
-
-          {grupos.map((grupo) => (
-            <Pressable
-              key={grupo}
-              style={({ pressed }) => [
-                styles.grupoBotao,
-                filtroGrupo === grupo && styles.grupoBotaoAtivo,
-                pressed && styles.grupoBotaoPressionado,
-              ]}
-              onPress={() => setFiltroGrupo(grupo)}
-            >
-              <Text
-                style={[
-                  styles.grupoTexto,
-                  filtroGrupo === grupo && styles.grupoTextoAtivo,
+              <Pressable
+                style={({ pressed }) => [
+                  styles.grupoBotao,
+                  filtroGrupo === "Todos" && styles.grupoBotaoAtivo,
+                  pressed && styles.grupoBotaoPressionado,
                 ]}
+                onPress={() => setFiltroGrupo("Todos")}
               >
-                {grupo}
-              </Text>
-            </Pressable>
-          ))}
-        </ScrollView>
-      </View>
+                <Text
+                  style={[
+                    styles.grupoTexto,
+                    filtroGrupo === "Todos" && styles.grupoTextoAtivo,
+                  ]}
+                >
+                  Todos
+                </Text>
+              </Pressable>
 
-      {jogosTratados.length === 0 ? (
-        <Text style={styles.emptyText}>
-          Nenhum jogo encontrado para o grupo {filtroGrupo}.
-        </Text>
+              {grupos.map((grupo) => (
+                <Pressable
+                  key={grupo}
+                  style={({ pressed }) => [
+                    styles.grupoBotao,
+                    filtroGrupo === grupo && styles.grupoBotaoAtivo,
+                    pressed && styles.grupoBotaoPressionado,
+                  ]}
+                  onPress={() => setFiltroGrupo(grupo)}
+                >
+                  <Text
+                    style={[
+                      styles.grupoTexto,
+                      filtroGrupo === grupo && styles.grupoTextoAtivo,
+                    ]}
+                  >
+                    {grupo}
+                  </Text>
+                </Pressable>
+              ))}
+            </ScrollView>
+          </View>
+
+          {jogosTratados.length === 0 ? (
+            <Text style={styles.emptyText}>
+              Nenhum jogo encontrado para o grupo {filtroGrupo}.
+            </Text>
+          ) : (
+            mainContent
+          )}
+        </>
       ) : (
         mainContent
       )}

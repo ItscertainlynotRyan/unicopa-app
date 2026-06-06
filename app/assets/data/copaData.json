@@ -1,8 +1,8 @@
 ﻿{
   "competicao": "Copa do Mundo FIFA 2026",
   "timezone_origem": "Eastern Time (ET)",
-  "timezone_convertido": "BrasÃ­lia (BRT)",
-  "observacao": "HorÃ¡rios convertidos de ET para BrasÃ­lia adicionando 1 hora. Jogos sujeitos a alteraÃ§Ã£o pela FIFA.",
+  "timezone_convertido": "Brasília (BRT)",
+  "observacao": "Horários convertidos de ET para Brasília adicionando 1 hora. Jogos sujeitos a alteração pela FIFA.",
   "total_jogos": 104,
   "jogos": [
     {
@@ -13,14 +13,14 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-11",
       "hora_brasilia": "16:00",
-      "time_casa": "MÃ©xico",
+      "time_casa": "México",
       "sigla_casa": "MEX",
-      "time_fora": "Ãfrica do Sul",
+      "time_fora": "África do Sul",
       "sigla_fora": "RSA",
-      "confronto": "MÃ©xico x Ãfrica do Sul",
-      "estadio": "EstÃ¡dio Azteca",
-      "cidade": "Cidade do MÃ©xico",
-      "pais": "MÃ©xico"
+      "confronto": "México x África do Sul",
+      "estadio": "Estádio Azteca",
+      "cidade": "Cidade do México",
+      "pais": "México"
     },
     {
       "id": 2,
@@ -32,12 +32,12 @@
       "hora_brasilia": "23:00",
       "time_casa": "Coreia do Sul",
       "sigla_casa": "KOR",
-      "time_fora": "TchÃ©quia",
+      "time_fora": "Tchéquia",
       "sigla_fora": "CZE",
-      "confronto": "Coreia do Sul x TchÃ©quia",
-      "estadio": "EstÃ¡dio Akron",
+      "confronto": "Coreia do Sul x Tchéquia",
+      "estadio": "Estádio Akron",
       "cidade": "Guadalajara",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 3,
@@ -47,14 +47,14 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-12",
       "hora_brasilia": "16:00",
-      "time_casa": "CanadÃ¡",
+      "time_casa": "Canadá",
       "sigla_casa": "CAN",
-      "time_fora": "BÃ³snia e Herzegovina",
+      "time_fora": "Bósnia e Herzegovina",
       "sigla_fora": "BIH",
-      "confronto": "CanadÃ¡ x BÃ³snia e Herzegovina",
+      "confronto": "Canadá x Bósnia e Herzegovina",
       "estadio": "BMO Field",
       "cidade": "Toronto",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 4,
@@ -83,9 +83,9 @@
       "hora_brasilia": "22:00",
       "time_casa": "Haiti",
       "sigla_casa": "HAI",
-      "time_fora": "EscÃ³cia",
+      "time_fora": "Escócia",
       "sigla_fora": "SCO",
-      "confronto": "Haiti x EscÃ³cia",
+      "confronto": "Haiti x Escócia",
       "estadio": "Gillette Stadium",
       "cidade": "Boston/Foxborough",
       "pais": "Estados Unidos"
@@ -98,14 +98,14 @@
       "hora_et": "00:00",
       "data_brasilia": "2026-06-13",
       "hora_brasilia": "01:00",
-      "time_casa": "AustrÃ¡lia",
+      "time_casa": "Austrália",
       "sigla_casa": "AUS",
       "time_fora": "Turquia",
       "sigla_fora": "TUR",
-      "confronto": "AustrÃ¡lia x Turquia",
+      "confronto": "Austrália x Turquia",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 7,
@@ -134,9 +134,9 @@
       "hora_brasilia": "16:00",
       "time_casa": "Catar",
       "sigla_casa": "QAT",
-      "time_fora": "SuÃ­Ã§a",
+      "time_fora": "Suíça",
       "sigla_fora": "SUI",
-      "confronto": "Catar x SuÃ­Ã§a",
+      "confronto": "Catar x Suíça",
       "estadio": "Levi's Stadium",
       "cidade": "San Francisco/Santa Clara",
       "pais": "Estados Unidos"
@@ -155,7 +155,7 @@
       "sigla_fora": "ECU",
       "confronto": "Costa do Marfim x Equador",
       "estadio": "Lincoln Financial Field",
-      "cidade": "FiladÃ©lfia",
+      "cidade": "Filadélfia",
       "pais": "Estados Unidos"
     },
     {
@@ -168,9 +168,9 @@
       "hora_brasilia": "14:00",
       "time_casa": "Alemanha",
       "sigla_casa": "GER",
-      "time_fora": "CuraÃ§ao",
+      "time_fora": "Curaçao",
       "sigla_fora": "CUW",
-      "confronto": "Alemanha x CuraÃ§ao",
+      "confronto": "Alemanha x Curaçao",
       "estadio": "NRG Stadium",
       "cidade": "Houston",
       "pais": "Estados Unidos"
@@ -185,9 +185,9 @@
       "hora_brasilia": "17:00",
       "time_casa": "Holanda",
       "sigla_casa": "NED",
-      "time_fora": "JapÃ£o",
+      "time_fora": "Japão",
       "sigla_fora": "JPN",
-      "confronto": "Holanda x JapÃ£o",
+      "confronto": "Holanda x Japão",
       "estadio": "AT&T Stadium",
       "cidade": "Dallas",
       "pais": "Estados Unidos"
@@ -200,14 +200,14 @@
       "hora_et": "22:00",
       "data_brasilia": "2026-06-14",
       "hora_brasilia": "23:00",
-      "time_casa": "SuÃ©cia",
+      "time_casa": "Suécia",
       "sigla_casa": "SWE",
-      "time_fora": "TunÃ­sia",
+      "time_fora": "Tunísia",
       "sigla_fora": "TUN",
-      "confronto": "SuÃ©cia x TunÃ­sia",
-      "estadio": "EstÃ¡dio BBVA",
+      "confronto": "Suécia x Tunísia",
+      "estadio": "Estádio BBVA",
       "cidade": "Monterrey",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 13,
@@ -217,11 +217,11 @@
       "hora_et": "18:00",
       "data_brasilia": "2026-06-15",
       "hora_brasilia": "19:00",
-      "time_casa": "ArÃ¡bia Saudita",
+      "time_casa": "Arábia Saudita",
       "sigla_casa": "KSA",
       "time_fora": "Uruguai",
       "sigla_fora": "URU",
-      "confronto": "ArÃ¡bia Saudita x Uruguai",
+      "confronto": "Arábia Saudita x Uruguai",
       "estadio": "Hard Rock Stadium",
       "cidade": "Miami",
       "pais": "Estados Unidos"
@@ -251,11 +251,11 @@
       "hora_et": "21:00",
       "data_brasilia": "2026-06-15",
       "hora_brasilia": "22:00",
-      "time_casa": "IrÃ£",
+      "time_casa": "Irã",
       "sigla_casa": "IRN",
-      "time_fora": "Nova ZelÃ¢ndia",
+      "time_fora": "Nova Zelândia",
       "sigla_fora": "NZL",
-      "confronto": "IrÃ£ x Nova ZelÃ¢ndia",
+      "confronto": "Irã x Nova Zelândia",
       "estadio": "SoFi Stadium",
       "cidade": "Los Angeles",
       "pais": "Estados Unidos"
@@ -268,11 +268,11 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-16",
       "hora_brasilia": "16:00",
-      "time_casa": "BÃ©lgica",
+      "time_casa": "Bélgica",
       "sigla_casa": "BEL",
       "time_fora": "Egito",
       "sigla_fora": "EGY",
-      "confronto": "BÃ©lgica x Egito",
+      "confronto": "Bélgica x Egito",
       "estadio": "Lumen Field",
       "cidade": "Seattle",
       "pais": "Estados Unidos"
@@ -285,11 +285,11 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-16",
       "hora_brasilia": "16:00",
-      "time_casa": "FranÃ§a",
+      "time_casa": "França",
       "sigla_casa": "FRA",
       "time_fora": "Senegal",
       "sigla_fora": "SEN",
-      "confronto": "FranÃ§a x Senegal",
+      "confronto": "França x Senegal",
       "estadio": "MetLife Stadium",
       "cidade": "Nova York/Nova Jersey",
       "pais": "Estados Unidos"
@@ -321,9 +321,9 @@
       "hora_brasilia": "22:00",
       "time_casa": "Argentina",
       "sigla_casa": "ARG",
-      "time_fora": "ArgÃ©lia",
+      "time_fora": "Argélia",
       "sigla_fora": "ALG",
-      "confronto": "Argentina x ArgÃ©lia",
+      "confronto": "Argentina x Argélia",
       "estadio": "AT&T Stadium",
       "cidade": "Dallas",
       "pais": "Estados Unidos"
@@ -336,11 +336,11 @@
       "hora_et": "00:00",
       "data_brasilia": "2026-06-17",
       "hora_brasilia": "01:00",
-      "time_casa": "Ãustria",
+      "time_casa": "Áustria",
       "sigla_casa": "AUT",
       "time_fora": "JordÃ¢nia",
       "sigla_fora": "JOR",
-      "confronto": "Ãustria x JordÃ¢nia",
+      "confronto": "Áustria x JordÃ¢nia",
       "estadio": "Levi's Stadium",
       "cidade": "San Francisco/Santa Clara",
       "pais": "Estados Unidos"
@@ -355,12 +355,12 @@
       "hora_brasilia": "20:00",
       "time_casa": "Gana",
       "sigla_casa": "GHA",
-      "time_fora": "PanamÃ¡",
+      "time_fora": "Panamá",
       "sigla_fora": "PAN",
-      "confronto": "Gana x PanamÃ¡",
+      "confronto": "Gana x Panamá",
       "estadio": "BMO Field",
       "cidade": "Toronto",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 22,
@@ -372,9 +372,9 @@
       "hora_brasilia": "17:00",
       "time_casa": "Inglaterra",
       "sigla_casa": "ENG",
-      "time_fora": "CroÃ¡cia",
+      "time_fora": "Croácia",
       "sigla_fora": "CRO",
-      "confronto": "Inglaterra x CroÃ¡cia",
+      "confronto": "Inglaterra x Croácia",
       "estadio": "Gillette Stadium",
       "cidade": "Boston/Foxborough",
       "pais": "Estados Unidos"
@@ -404,14 +404,14 @@
       "hora_et": "22:00",
       "data_brasilia": "2026-06-18",
       "hora_brasilia": "23:00",
-      "time_casa": "UzbequistÃ£o",
+      "time_casa": "Uzbequistão",
       "sigla_casa": "UZB",
-      "time_fora": "ColÃ´mbia",
+      "time_fora": "Colômbia",
       "sigla_fora": "COL",
-      "confronto": "UzbequistÃ£o x ColÃ´mbia",
-      "estadio": "EstÃ¡dio Akron",
+      "confronto": "Uzbequistão x Colômbia",
+      "estadio": "Estádio Akron",
       "cidade": "Guadalajara",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 25,
@@ -421,11 +421,11 @@
       "hora_et": "12:00",
       "data_brasilia": "2026-06-18",
       "hora_brasilia": "13:00",
-      "time_casa": "TchÃ©quia",
+      "time_casa": "Tchéquia",
       "sigla_casa": "CZE",
-      "time_fora": "Ãfrica do Sul",
+      "time_fora": "África do Sul",
       "sigla_fora": "RSA",
-      "confronto": "TchÃ©quia x Ãfrica do Sul",
+      "confronto": "Tchéquia x África do Sul",
       "estadio": "Mercedes-Benz Stadium",
       "cidade": "Atlanta",
       "pais": "Estados Unidos"
@@ -438,11 +438,11 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-18",
       "hora_brasilia": "16:00",
-      "time_casa": "SuÃ­Ã§a",
+      "time_casa": "Suíça",
       "sigla_casa": "SUI",
-      "time_fora": "BÃ³snia e Herzegovina",
+      "time_fora": "Bósnia e Herzegovina",
       "sigla_fora": "BIH",
-      "confronto": "SuÃ­Ã§a x BÃ³snia e Herzegovina",
+      "confronto": "Suíça x Bósnia e Herzegovina",
       "estadio": "SoFi Stadium",
       "cidade": "Los Angeles",
       "pais": "Estados Unidos"
@@ -455,14 +455,14 @@
       "hora_et": "18:00",
       "data_brasilia": "2026-06-18",
       "hora_brasilia": "19:00",
-      "time_casa": "CanadÃ¡",
+      "time_casa": "Canadá",
       "sigla_casa": "CAN",
       "time_fora": "Catar",
       "sigla_fora": "QAT",
-      "confronto": "CanadÃ¡ x Catar",
+      "confronto": "Canadá x Catar",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 28,
@@ -472,14 +472,14 @@
       "hora_et": "21:00",
       "data_brasilia": "2026-06-18",
       "hora_brasilia": "22:00",
-      "time_casa": "MÃ©xico",
+      "time_casa": "México",
       "sigla_casa": "MEX",
       "time_fora": "Coreia do Sul",
       "sigla_fora": "KOR",
-      "confronto": "MÃ©xico x Coreia do Sul",
-      "estadio": "EstÃ¡dio Akron",
+      "confronto": "México x Coreia do Sul",
+      "estadio": "Estádio Akron",
       "cidade": "Guadalajara",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 29,
@@ -495,7 +495,7 @@
       "sigla_fora": "HAI",
       "confronto": "Brasil x Haiti",
       "estadio": "Lincoln Financial Field",
-      "cidade": "FiladÃ©lfia",
+      "cidade": "Filadélfia",
       "pais": "Estados Unidos"
     },
     {
@@ -506,11 +506,11 @@
       "hora_et": "18:00",
       "data_brasilia": "2026-06-19",
       "hora_brasilia": "19:00",
-      "time_casa": "EscÃ³cia",
+      "time_casa": "Escócia",
       "sigla_casa": "SCO",
       "time_fora": "Marrocos",
       "sigla_fora": "MAR",
-      "confronto": "EscÃ³cia x Marrocos",
+      "confronto": "Escócia x Marrocos",
       "estadio": "Gillette Stadium",
       "cidade": "Boston/Foxborough",
       "pais": "Estados Unidos"
@@ -542,9 +542,9 @@
       "hora_brasilia": "16:00",
       "time_casa": "Estados Unidos",
       "sigla_casa": "USA",
-      "time_fora": "AustrÃ¡lia",
+      "time_fora": "Austrália",
       "sigla_fora": "AUS",
-      "confronto": "Estados Unidos x AustrÃ¡lia",
+      "confronto": "Estados Unidos x Austrália",
       "estadio": "Lumen Field",
       "cidade": "Seattle",
       "pais": "Estados Unidos"
@@ -564,7 +564,7 @@
       "confronto": "Alemanha x Costa do Marfim",
       "estadio": "BMO Field",
       "cidade": "Toronto",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 34,
@@ -576,9 +576,9 @@
       "hora_brasilia": "21:00",
       "time_casa": "Equador",
       "sigla_casa": "ECU",
-      "time_fora": "CuraÃ§ao",
+      "time_fora": "Curaçao",
       "sigla_fora": "CUW",
-      "confronto": "Equador x CuraÃ§ao",
+      "confronto": "Equador x Curaçao",
       "estadio": "GEHA Field at Arrowhead Stadium",
       "cidade": "Kansas City",
       "pais": "Estados Unidos"
@@ -593,9 +593,9 @@
       "hora_brasilia": "14:00",
       "time_casa": "Holanda",
       "sigla_casa": "NED",
-      "time_fora": "SuÃ©cia",
+      "time_fora": "Suécia",
       "sigla_fora": "SWE",
-      "confronto": "Holanda x SuÃ©cia",
+      "confronto": "Holanda x Suécia",
       "estadio": "NRG Stadium",
       "cidade": "Houston",
       "pais": "Estados Unidos"
@@ -608,14 +608,14 @@
       "hora_et": "00:00",
       "data_brasilia": "2026-06-20",
       "hora_brasilia": "01:00",
-      "time_casa": "TunÃ­sia",
+      "time_casa": "Tunísia",
       "sigla_casa": "TUN",
-      "time_fora": "JapÃ£o",
+      "time_fora": "Japão",
       "sigla_fora": "JPN",
-      "confronto": "TunÃ­sia x JapÃ£o",
-      "estadio": "EstÃ¡dio BBVA",
+      "confronto": "Tunísia x Japão",
+      "estadio": "Estádio BBVA",
       "cidade": "Monterrey",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 37,
@@ -644,9 +644,9 @@
       "hora_brasilia": "13:00",
       "time_casa": "Espanha",
       "sigla_casa": "ESP",
-      "time_fora": "ArÃ¡bia Saudita",
+      "time_fora": "Arábia Saudita",
       "sigla_fora": "KSA",
-      "confronto": "Espanha x ArÃ¡bia Saudita",
+      "confronto": "Espanha x Arábia Saudita",
       "estadio": "Mercedes-Benz Stadium",
       "cidade": "Atlanta",
       "pais": "Estados Unidos"
@@ -659,11 +659,11 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-21",
       "hora_brasilia": "16:00",
-      "time_casa": "BÃ©lgica",
+      "time_casa": "Bélgica",
       "sigla_casa": "BEL",
-      "time_fora": "IrÃ£",
+      "time_fora": "Irã",
       "sigla_fora": "IRN",
-      "confronto": "BÃ©lgica x IrÃ£",
+      "confronto": "Bélgica x Irã",
       "estadio": "SoFi Stadium",
       "cidade": "Los Angeles",
       "pais": "Estados Unidos"
@@ -676,14 +676,14 @@
       "hora_et": "21:00",
       "data_brasilia": "2026-06-21",
       "hora_brasilia": "22:00",
-      "time_casa": "Nova ZelÃ¢ndia",
+      "time_casa": "Nova Zelândia",
       "sigla_casa": "NZL",
       "time_fora": "Egito",
       "sigla_fora": "EGY",
-      "confronto": "Nova ZelÃ¢ndia x Egito",
+      "confronto": "Nova Zelândia x Egito",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 41,
@@ -700,7 +700,7 @@
       "confronto": "Noruega x Senegal",
       "estadio": "BMO Field",
       "cidade": "Toronto",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 42,
@@ -710,13 +710,13 @@
       "hora_et": "17:00",
       "data_brasilia": "2026-06-22",
       "hora_brasilia": "18:00",
-      "time_casa": "FranÃ§a",
+      "time_casa": "França",
       "sigla_casa": "FRA",
       "time_fora": "Iraque",
       "sigla_fora": "IRQ",
-      "confronto": "FranÃ§a x Iraque",
+      "confronto": "França x Iraque",
       "estadio": "Lincoln Financial Field",
-      "cidade": "FiladÃ©lfia",
+      "cidade": "Filadélfia",
       "pais": "Estados Unidos"
     },
     {
@@ -729,9 +729,9 @@
       "hora_brasilia": "14:00",
       "time_casa": "Argentina",
       "sigla_casa": "ARG",
-      "time_fora": "Ãustria",
+      "time_fora": "Áustria",
       "sigla_fora": "AUT",
-      "confronto": "Argentina x Ãustria",
+      "confronto": "Argentina x Áustria",
       "estadio": "AT&T Stadium",
       "cidade": "Dallas",
       "pais": "Estados Unidos"
@@ -746,9 +746,9 @@
       "hora_brasilia": "00:00",
       "time_casa": "JordÃ¢nia",
       "sigla_casa": "JOR",
-      "time_fora": "ArgÃ©lia",
+      "time_fora": "Argélia",
       "sigla_fora": "ALG",
-      "confronto": "JordÃ¢nia x ArgÃ©lia",
+      "confronto": "JordÃ¢nia x Argélia",
       "estadio": "Levi's Stadium",
       "cidade": "San Francisco/Santa Clara",
       "pais": "Estados Unidos"
@@ -778,14 +778,14 @@
       "hora_et": "19:00",
       "data_brasilia": "2026-06-23",
       "hora_brasilia": "20:00",
-      "time_casa": "PanamÃ¡",
+      "time_casa": "Panamá",
       "sigla_casa": "PAN",
-      "time_fora": "CroÃ¡cia",
+      "time_fora": "Croácia",
       "sigla_fora": "CRO",
-      "confronto": "PanamÃ¡ x CroÃ¡cia",
+      "confronto": "Panamá x Croácia",
       "estadio": "BMO Field",
       "cidade": "Toronto",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 47,
@@ -797,9 +797,9 @@
       "hora_brasilia": "14:00",
       "time_casa": "Portugal",
       "sigla_casa": "POR",
-      "time_fora": "UzbequistÃ£o",
+      "time_fora": "Uzbequistão",
       "sigla_fora": "UZB",
-      "confronto": "Portugal x UzbequistÃ£o",
+      "confronto": "Portugal x Uzbequistão",
       "estadio": "NRG Stadium",
       "cidade": "Houston",
       "pais": "Estados Unidos"
@@ -812,14 +812,14 @@
       "hora_et": "22:00",
       "data_brasilia": "2026-06-23",
       "hora_brasilia": "23:00",
-      "time_casa": "ColÃ´mbia",
+      "time_casa": "Colômbia",
       "sigla_casa": "COL",
       "time_fora": "RD Congo",
       "sigla_fora": "COD",
-      "confronto": "ColÃ´mbia x RD Congo",
-      "estadio": "EstÃ¡dio Akron",
+      "confronto": "Colômbia x RD Congo",
+      "estadio": "Estádio Akron",
       "cidade": "Guadalajara",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 49,
@@ -829,11 +829,11 @@
       "hora_et": "18:00",
       "data_brasilia": "2026-06-24",
       "hora_brasilia": "19:00",
-      "time_casa": "EscÃ³cia",
+      "time_casa": "Escócia",
       "sigla_casa": "SCO",
       "time_fora": "Brasil",
       "sigla_fora": "BRA",
-      "confronto": "EscÃ³cia x Brasil",
+      "confronto": "Escócia x Brasil",
       "estadio": "Hard Rock Stadium",
       "cidade": "Miami",
       "pais": "Estados Unidos"
@@ -863,14 +863,14 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-24",
       "hora_brasilia": "16:00",
-      "time_casa": "SuÃ­Ã§a",
+      "time_casa": "Suíça",
       "sigla_casa": "SUI",
-      "time_fora": "CanadÃ¡",
+      "time_fora": "Canadá",
       "sigla_fora": "CAN",
-      "confronto": "SuÃ­Ã§a x CanadÃ¡",
+      "confronto": "Suíça x Canadá",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 52,
@@ -880,11 +880,11 @@
       "hora_et": "15:00",
       "data_brasilia": "2026-06-24",
       "hora_brasilia": "16:00",
-      "time_casa": "BÃ³snia e Herzegovina",
+      "time_casa": "Bósnia e Herzegovina",
       "sigla_casa": "BIH",
       "time_fora": "Catar",
       "sigla_fora": "QAT",
-      "confronto": "BÃ³snia e Herzegovina x Catar",
+      "confronto": "Bósnia e Herzegovina x Catar",
       "estadio": "Lumen Field",
       "cidade": "Seattle",
       "pais": "Estados Unidos"
@@ -897,14 +897,14 @@
       "hora_et": "21:00",
       "data_brasilia": "2026-06-24",
       "hora_brasilia": "22:00",
-      "time_casa": "TchÃ©quia",
+      "time_casa": "Tchéquia",
       "sigla_casa": "CZE",
-      "time_fora": "MÃ©xico",
+      "time_fora": "México",
       "sigla_fora": "MEX",
-      "confronto": "TchÃ©quia x MÃ©xico",
-      "estadio": "EstÃ¡dio Azteca",
-      "cidade": "Cidade do MÃ©xico",
-      "pais": "MÃ©xico"
+      "confronto": "Tchéquia x México",
+      "estadio": "Estádio Azteca",
+      "cidade": "Cidade do México",
+      "pais": "México"
     },
     {
       "id": 54,
@@ -914,14 +914,14 @@
       "hora_et": "21:00",
       "data_brasilia": "2026-06-24",
       "hora_brasilia": "22:00",
-      "time_casa": "Ãfrica do Sul",
+      "time_casa": "África do Sul",
       "sigla_casa": "RSA",
       "time_fora": "Coreia do Sul",
       "sigla_fora": "KOR",
-      "confronto": "Ãfrica do Sul x Coreia do Sul",
-      "estadio": "EstÃ¡dio BBVA",
+      "confronto": "África do Sul x Coreia do Sul",
+      "estadio": "Estádio BBVA",
       "cidade": "Monterrey",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 55,
@@ -931,13 +931,13 @@
       "hora_et": "16:00",
       "data_brasilia": "2026-06-25",
       "hora_brasilia": "17:00",
-      "time_casa": "CuraÃ§ao",
+      "time_casa": "Curaçao",
       "sigla_casa": "CUW",
       "time_fora": "Costa do Marfim",
       "sigla_fora": "CIV",
-      "confronto": "CuraÃ§ao x Costa do Marfim",
+      "confronto": "Curaçao x Costa do Marfim",
       "estadio": "Lincoln Financial Field",
-      "cidade": "FiladÃ©lfia",
+      "cidade": "Filadélfia",
       "pais": "Estados Unidos"
     },
     {
@@ -965,11 +965,11 @@
       "hora_et": "19:00",
       "data_brasilia": "2026-06-25",
       "hora_brasilia": "20:00",
-      "time_casa": "JapÃ£o",
+      "time_casa": "Japão",
       "sigla_casa": "JPN",
-      "time_fora": "SuÃ©cia",
+      "time_fora": "Suécia",
       "sigla_fora": "SWE",
-      "confronto": "JapÃ£o x SuÃ©cia",
+      "confronto": "Japão x Suécia",
       "estadio": "AT&T Stadium",
       "cidade": "Dallas",
       "pais": "Estados Unidos"
@@ -982,11 +982,11 @@
       "hora_et": "19:00",
       "data_brasilia": "2026-06-25",
       "hora_brasilia": "20:00",
-      "time_casa": "TunÃ­sia",
+      "time_casa": "Tunísia",
       "sigla_casa": "TUN",
       "time_fora": "Holanda",
       "sigla_fora": "NED",
-      "confronto": "TunÃ­sia x Holanda",
+      "confronto": "Tunísia x Holanda",
       "estadio": "GEHA Field at Arrowhead Stadium",
       "cidade": "Kansas City",
       "pais": "Estados Unidos"
@@ -1018,9 +1018,9 @@
       "hora_brasilia": "23:00",
       "time_casa": "Paraguai",
       "sigla_casa": "PAR",
-      "time_fora": "AustrÃ¡lia",
+      "time_fora": "Austrália",
       "sigla_fora": "AUS",
-      "confronto": "Paraguai x AustrÃ¡lia",
+      "confronto": "Paraguai x Austrália",
       "estadio": "Levi's Stadium",
       "cidade": "San Francisco/Santa Clara",
       "pais": "Estados Unidos"
@@ -1035,9 +1035,9 @@
       "hora_brasilia": "16:00",
       "time_casa": "Noruega",
       "sigla_casa": "NOR",
-      "time_fora": "FranÃ§a",
+      "time_fora": "França",
       "sigla_fora": "FRA",
-      "confronto": "Noruega x FranÃ§a",
+      "confronto": "Noruega x França",
       "estadio": "Gillette Stadium",
       "cidade": "Boston/Foxborough",
       "pais": "Estados Unidos"
@@ -1057,7 +1057,7 @@
       "confronto": "Senegal x Iraque",
       "estadio": "BMO Field",
       "cidade": "Toronto",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 63,
@@ -1069,9 +1069,9 @@
       "hora_brasilia": "00:00",
       "time_casa": "Egito",
       "sigla_casa": "EGY",
-      "time_fora": "IrÃ£",
+      "time_fora": "Irã",
       "sigla_fora": "IRN",
-      "confronto": "Egito x IrÃ£",
+      "confronto": "Egito x Irã",
       "estadio": "Lumen Field",
       "cidade": "Seattle",
       "pais": "Estados Unidos"
@@ -1084,14 +1084,14 @@
       "hora_et": "23:00",
       "data_brasilia": "2026-06-27",
       "hora_brasilia": "00:00",
-      "time_casa": "Nova ZelÃ¢ndia",
+      "time_casa": "Nova Zelândia",
       "sigla_casa": "NZL",
-      "time_fora": "BÃ©lgica",
+      "time_fora": "Bélgica",
       "sigla_fora": "BEL",
-      "confronto": "Nova ZelÃ¢ndia x BÃ©lgica",
+      "confronto": "Nova Zelândia x Bélgica",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 65,
@@ -1103,9 +1103,9 @@
       "hora_brasilia": "21:00",
       "time_casa": "Cabo Verde",
       "sigla_casa": "CPV",
-      "time_fora": "ArÃ¡bia Saudita",
+      "time_fora": "Arábia Saudita",
       "sigla_fora": "KSA",
-      "confronto": "Cabo Verde x ArÃ¡bia Saudita",
+      "confronto": "Cabo Verde x Arábia Saudita",
       "estadio": "NRG Stadium",
       "cidade": "Houston",
       "pais": "Estados Unidos"
@@ -1123,9 +1123,9 @@
       "time_fora": "Espanha",
       "sigla_fora": "ESP",
       "confronto": "Uruguai x Espanha",
-      "estadio": "EstÃ¡dio Akron",
+      "estadio": "Estádio Akron",
       "cidade": "Guadalajara",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 67,
@@ -1135,11 +1135,11 @@
       "hora_et": "17:00",
       "data_brasilia": "2026-06-27",
       "hora_brasilia": "18:00",
-      "time_casa": "PanamÃ¡",
+      "time_casa": "Panamá",
       "sigla_casa": "PAN",
       "time_fora": "Inglaterra",
       "sigla_fora": "ENG",
-      "confronto": "PanamÃ¡ x Inglaterra",
+      "confronto": "Panamá x Inglaterra",
       "estadio": "MetLife Stadium",
       "cidade": "Nova York/Nova Jersey",
       "pais": "Estados Unidos"
@@ -1152,13 +1152,13 @@
       "hora_et": "17:00",
       "data_brasilia": "2026-06-27",
       "hora_brasilia": "18:00",
-      "time_casa": "CroÃ¡cia",
+      "time_casa": "Croácia",
       "sigla_casa": "CRO",
       "time_fora": "Gana",
       "sigla_fora": "GHA",
-      "confronto": "CroÃ¡cia x Gana",
+      "confronto": "Croácia x Gana",
       "estadio": "Lincoln Financial Field",
-      "cidade": "FiladÃ©lfia",
+      "cidade": "Filadélfia",
       "pais": "Estados Unidos"
     },
     {
@@ -1169,11 +1169,11 @@
       "hora_et": "22:00",
       "data_brasilia": "2026-06-27",
       "hora_brasilia": "23:00",
-      "time_casa": "ArgÃ©lia",
+      "time_casa": "Argélia",
       "sigla_casa": "ALG",
-      "time_fora": "Ãustria",
+      "time_fora": "Áustria",
       "sigla_fora": "AUT",
-      "confronto": "ArgÃ©lia x Ãustria",
+      "confronto": "Argélia x Áustria",
       "estadio": "AT&T Stadium",
       "cidade": "Dallas",
       "pais": "Estados Unidos"
@@ -1203,11 +1203,11 @@
       "hora_et": "19:30",
       "data_brasilia": "2026-06-27",
       "hora_brasilia": "20:30",
-      "time_casa": "ColÃ´mbia",
+      "time_casa": "Colômbia",
       "sigla_casa": "COL",
       "time_fora": "Portugal",
       "sigla_fora": "POR",
-      "confronto": "ColÃ´mbia x Portugal",
+      "confronto": "Colômbia x Portugal",
       "estadio": "Hard Rock Stadium",
       "cidade": "Miami",
       "pais": "Estados Unidos"
@@ -1222,12 +1222,12 @@
       "hora_brasilia": "20:30",
       "time_casa": "RD Congo",
       "sigla_casa": "COD",
-      "time_fora": "UzbequistÃ£o",
+      "time_fora": "Uzbequistão",
       "sigla_fora": "UZB",
-      "confronto": "RD Congo x UzbequistÃ£o",
-      "estadio": "EstÃ¡dio BBVA",
+      "confronto": "RD Congo x Uzbequistão",
+      "estadio": "Estádio BBVA",
       "cidade": "Monterrey",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 73,
@@ -1276,9 +1276,9 @@
       "time_fora": "2C",
       "sigla_fora": "2C",
       "confronto": "1F x 2C",
-      "estadio": "EstÃ¡dio BBVA",
+      "estadio": "Estádio BBVA",
       "cidade": "Monterrey",
-      "pais": "MÃ©xico"
+      "pais": "México"
     },
     {
       "id": 76,
@@ -1344,9 +1344,9 @@
       "time_fora": "3CEFHI",
       "sigla_fora": "3CEFHI",
       "confronto": "1A x 3CEFHI",
-      "estadio": "EstÃ¡dio Azteca",
-      "cidade": "Cidade do MÃ©xico",
-      "pais": "MÃ©xico"
+      "estadio": "Estádio Azteca",
+      "cidade": "Cidade do México",
+      "pais": "México"
     },
     {
       "id": 80,
@@ -1448,7 +1448,7 @@
       "confronto": "1B x 3EFGIJ",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 86,
@@ -1464,7 +1464,7 @@
       "sigla_fora": "2H",
       "confronto": "1J x 2H",
       "estadio": "Lincoln Financial Field",
-      "cidade": "FiladÃ©lfia",
+      "cidade": "Filadélfia",
       "pais": "Estados Unidos"
     },
     {
@@ -1565,9 +1565,9 @@
       "time_fora": "W80",
       "sigla_fora": "W80",
       "confronto": "W79 x W80",
-      "estadio": "EstÃ¡dio Azteca",
-      "cidade": "Cidade do MÃ©xico",
-      "pais": "MÃ©xico"
+      "estadio": "Estádio Azteca",
+      "cidade": "Cidade do México",
+      "pais": "México"
     },
     {
       "id": 93,
@@ -1635,7 +1635,7 @@
       "confronto": "W85 x W87",
       "estadio": "BC Place",
       "cidade": "Vancouver",
-      "pais": "CanadÃ¡"
+      "pais": "Canadá"
     },
     {
       "id": 97,
@@ -1741,7 +1741,7 @@
     },
     {
       "id": 103,
-      "fase": "Disputa de 3Âº lugar",
+      "fase": "Disputa de 3º lugar",
       "grupo": null,
       "data_et": "2026-07-18",
       "hora_et": "17:00",
@@ -1774,5 +1774,5 @@
       "pais": "Estados Unidos"
     }
   ],
-  "observacao_estadios": "Campos estadio, cidade e pais adicionados para uso no protÃ³tipo. Recomenda-se validar com a tabela oficial da FIFA antes de uso pÃºblico/final."
+  "observacao_estadios": "Campos estadio, cidade e pais adicionados para uso no protótipo. Recomenda-se validar com a tabela oficial da FIFA antes de uso público/final."
 }
